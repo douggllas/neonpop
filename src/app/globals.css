@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-oswald);
+  --font-serif: var(--font-oswald);
 }
 
 @keyframes ticker {
