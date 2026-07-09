@@ -9,14 +9,17 @@ interface Data { categoria: Categoria | null; artigos: Artigo[] }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  const { categoria } = await sanityFetch<Data>(QUERY_CATEGORIA, { slug })
+  const data = await sanityFetch<Data>(QUERY_CATEGORIA, { slug })
+  const categoria = data?.categoria ?? null
   if (!categoria) return {}
   return { title: categoria.nome, description: `Todos os artigos de ${categoria.nome} no NEONPOP.` }
 }
 
 export default async function PaginaCategoria({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const { categoria, artigos } = await sanityFetch<Data>(QUERY_CATEGORIA, { slug })
+  const data = await sanityFetch<Data>(QUERY_CATEGORIA, { slug })
+  const categoria = data?.categoria ?? null
+  const artigos: Artigo[] = data?.artigos ?? []
 
   if (!categoria) notFound()
 

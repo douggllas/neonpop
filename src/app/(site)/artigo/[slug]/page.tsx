@@ -9,7 +9,7 @@ import { ImagemSanity } from '@/components/ui/ImagemSanity'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  const artigo = await sanityFetch<Artigo | null>(QUERY_ARTIGO, { slug })
+  const artigo = await sanityFetch<Artigo>(QUERY_ARTIGO, { slug })
   if (!artigo) return {}
   return {
     title: artigo.titulo,
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function PaginaArtigo({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const artigo = await sanityFetch<Artigo | null>(QUERY_ARTIGO, { slug })
+  const artigo = await sanityFetch<Artigo>(QUERY_ARTIGO, { slug })
 
   if (!artigo) notFound()
 

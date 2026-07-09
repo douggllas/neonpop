@@ -7,8 +7,8 @@ import { Categoria, Artigo } from '@/types'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const [categorias, tickerArtigos] = await Promise.all([
-    sanityFetch<Categoria[]>(QUERY_CATEGORIAS),
-    sanityFetch<Pick<Artigo, 'titulo' | 'slug'>[]>(QUERY_TICKER),
+    sanityFetch<Categoria[]>(QUERY_CATEGORIAS).then(r => r ?? []),
+    sanityFetch<Pick<Artigo, 'titulo' | 'slug'>[]>(QUERY_TICKER).then(r => r ?? []),
   ])
 
   return (
