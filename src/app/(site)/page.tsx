@@ -12,11 +12,14 @@ interface HomepageData {
 }
 
 export default async function Homepage() {
-  const { destaques, recentes, categorias } = await sanityFetch<HomepageData>(QUERY_HOMEPAGE)
+  const data = await sanityFetch<HomepageData>(QUERY_HOMEPAGE)
+  const destaques: Artigo[] = data?.destaques ?? []
+  const recentes: Artigo[] = data?.recentes ?? []
+  const categorias: Categoria[] = data?.categorias ?? []
 
   const porCategoria = categorias.map(cat => ({
     categoria: cat,
-    artigos: recentes.filter(a => a.categoria._id === cat._id),
+    artigos: recentes.filter(a => a.categoria?._id === cat._id),
   })).filter(g => g.artigos.length > 0)
 
   return (

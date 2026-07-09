@@ -21,5 +21,10 @@ export function urlParaImagem(source: SanityImage) {
 
 export async function sanityFetch<T>(query: string, params?: Record<string, unknown>): Promise<T> {
   if (!isConfigured) return [] as unknown as T
-  return client.fetch<T>(query, params ?? {})
+  try {
+    return await client.fetch<T>(query, params ?? {})
+  } catch (err) {
+    console.error('[sanityFetch] query failed:', err)
+    return [] as unknown as T
+  }
 }

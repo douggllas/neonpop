@@ -2,3 +2,7 @@ name = "neonpop"
 pages_build_output_dir = ".open-next"
 compatibility_date = "2026-07-08"
 compatibility_flags = ["nodejs_compat"]
+
+[vars]
+NEXT_PUBLIC_SANITY_PROJECT_ID = "zxroagtn"
+NEXT_PUBLIC_SANITY_DATASET = "production"
